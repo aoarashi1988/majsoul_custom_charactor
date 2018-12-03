@@ -173,7 +173,7 @@
 			"name": "改一姬立绘",
 			"ruleType": "redirect",
 			"matchType": "regexp",
-			"pattern": "^http(s?)://(www\\.)?majsoul\\.union-game\\.com/0/*/extendRes/charactor/yiji/full.png",
+			"pattern": "^http(s?)://(www\\.)?majsoul\\.union-game\\.com/0/(.*?)/extendRes/charactor/yiji/full.png",
 			"exclude": "",
 			"group": "majsoul",
 			"isFunction": false,
