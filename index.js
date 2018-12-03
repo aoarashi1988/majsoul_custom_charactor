@@ -9,10 +9,17 @@ app.use(cors())
 
 function getImage(originalUrl) {
   const path = formatUrl(originalUrl)
-  const data = fs.readFileSync(path)
-  console.log('read data  = ', data)
+  console.log('接收到图片资源请求，路径 = ', path)
+  let data
+  try {
+    console.log('正在读取本地文件...')
+    data = fs.readFileSync(path)
+  } catch (error) {
+    throw '文件不存在，请检查charactors文件夹内容'
+  }
+  console.log('本地文件读取完毕，正在加密...')
   const encodeBuffer = util.XOR(data)
-  console.log('encode buffer, length = ', encodeBuffer.length)
+  console.log('加密完毕，返回加密后图片')
   return encodeBuffer
 }
 
@@ -21,7 +28,6 @@ function formatUrl(originalUrl) {
 }
 
 app.get('/charactors/*', (req, res) => {
-  console.log(req.originalUrl)
   const image = getImage(req.originalUrl)
   res.send(image)
 })
