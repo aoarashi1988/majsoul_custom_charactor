@@ -163,8 +163,8 @@ function writeCodePatchedJS({ codeJS, bgmJS }) {
 
   fs.writeFileSync(path, codePatchedJS)
 
-  console.log('\n写入完毕')
-  console.log('\n本地服务器初始化完成，祝君游戏愉快 \\(^o^)/~')
+  console.log('\n写入本地code.patched.js完毕')
+  console.log('\n本地服务器初始化完成，祝君雀力日进 \\(^o^)/~')
 }
 
 getVersionJson()
@@ -187,7 +187,7 @@ function initDir(dir) {
         }
       })
     } else {
-      console.log(`\n /${dir} 目录已存在，无需重复创建`)
+      console.log(`\n/${dir} 目录已存在，无需重复创建`)
     }
   })
 }
