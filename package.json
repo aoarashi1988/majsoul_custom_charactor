@@ -1,11 +1,11 @@
 {
   "name": "majsoul_custrom_charactor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "npm install && node index.js"
   },
   "author": "",
   "license": "ISC",
