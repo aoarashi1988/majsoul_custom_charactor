@@ -9,6 +9,9 @@
 
 [下载地址](http://nodejs.cn/download/)
 
+## 1.02 更新
+1、解锁报菜名（请谨慎使用）
+
 ## 1.0.1 更新：
 
 1、能够自动获取code.js并生成对应的code.patched.js
