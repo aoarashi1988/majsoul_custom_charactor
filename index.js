@@ -4,10 +4,11 @@ const server = http.Server(app)
 const cors = require('cors')
 const fs = require('fs')
 const util = require('./script/util')
+const path = require('path')
 
 app.use(cors())
 
-function getImage(originalUrl) {
+function getImage (originalUrl) {
   const path = formatUrl(originalUrl)
   console.log('\n接收到图片资源请求，路径 = ', path)
   let data
@@ -23,7 +24,7 @@ function getImage(originalUrl) {
   return encodeBuffer
 }
 
-function formatUrl(originalUrl) {
+function formatUrl (originalUrl) {
   return __dirname + originalUrl
 }
 
@@ -44,7 +45,7 @@ server.listen(8000, () => {
   console.log('\nserver is running on port 8000')
 })
 
-function getVersionJson() {
+function getVersionJson () {
   return new Promise((resolve, reject) => {
 
     console.log('\n正在获取version.json...')
@@ -71,7 +72,8 @@ function getVersionJson() {
 
       let rawData = ''
 
-      res.on('data', chunk => { rawData += chunk })
+      res.on('data', chunk => {
+        rawData += chunk})
 
       res.on('end', () => {
         try {
@@ -88,7 +90,7 @@ function getVersionJson() {
   })
 }
 
-function getCodeJS(versionJson) {
+function getCodeJS (versionJson) {
   return new Promise((resolve, reject) => {
 
     console.log('\n正在获取code.js...')
@@ -119,7 +121,7 @@ function getCodeJS(versionJson) {
   })
 }
 
-function checkCodePatchedJS(codeJS) {
+function checkCodePatchedJS (codeJS) {
   return new Promise((resolve, reject) => {
 
     console.log('\n校验本地code.patched.js...')
@@ -136,29 +138,32 @@ function checkCodePatchedJS(codeJS) {
   })
 }
 
-function readBgmJS(codeJS) {
+const patchJSPaths = [
+  path.join(__dirname, '/script/bgm.js'),
+  path.join(__dirname, '/script/game.Tools.js')
+]
+
+function readPatchJS (codeJS) {
   return new Promise((resolve, reject) => {
-
-    console.log('\n读取本地bgm.js...')
-
-    const path = __dirname + '/script/bgm.js'
-    const exists = fs.existsSync(path)
-
-    if (exists) {
-      const bgmJS = fs.readFileSync(path, 'utf8')
-      console.log('\n读取成功')
-      resolve({ codeJS, bgmJS })
+    let patchJS = ''
+    console.log('开始读取本地patch文件')
+    for (let index = 0; index < patchJSPaths.length; index++) {
+      const path = patchJSPaths[index]
+      const exists = fs.existsSync(path)
+      if (exists) {
+        patchJS += fs.readFileSync(path, 'utf8')
+      }
     }
+    resolve({codeJS, patchJS})
 
     reject('\n/script/bgm.js 文件不存在， 你可以前往 https://github.com/aoarashi1988/majsoul_custrom_charactor 下载对应文件')
   })
 }
 
-function writeCodePatchedJS({ codeJS, bgmJS }) {
-
+function writeCodePatchedJS ({ codeJS, patchJS }) {
   console.log('\n开始写入本地code.patched.js...')
-  
-  const codePatchedJS = codeJS + bgmJS
+
+  const codePatchedJS = codeJS + patchJS
   const path = __dirname + '/script/code.patched.js'
 
   fs.writeFileSync(path, codePatchedJS)
@@ -170,11 +175,11 @@ function writeCodePatchedJS({ codeJS, bgmJS }) {
 getVersionJson()
   .then(getCodeJS)
   .then(checkCodePatchedJS)
-  .then(readBgmJS)
+  .then(readPatchJS)
   .then(writeCodePatchedJS)
   .catch(console.log)
 
-function initDir(dir) {
+function initDir (dir) {
   console.log(`\n检查 /${dir} 目录是否存在...`)
   fs.exists(__dirname + `/${dir}`, exists => {
     if (!exists) {
