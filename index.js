@@ -1,4 +1,5 @@
 const app = require('express')()
+const https = require('https')
 const http = require('http')
 const server = http.Server(app)
 const cors = require('cors')
@@ -50,7 +51,7 @@ function getVersionJson () {
 
     console.log('\n正在获取version.json...')
 
-    http.get('http://majsoul.union-game.com/0/version.json', res => {
+    https.get('https://majsoul.union-game.com/0/version.json', res => {
 
       const { statusCode } = res
       const contentType = res.headers['content-type']
@@ -95,9 +96,9 @@ function getCodeJS (versionJson) {
 
     console.log('\n正在获取code.js...')
 
-    const codeJsUrl = `http://majsoul.union-game.com/0/${versionJson['code']}`
+    const codeJsUrl = `https://majsoul.union-game.com/0/${versionJson['code']}`
 
-    http.get(codeJsUrl, res => {
+    https.get(codeJsUrl, res => {
 
       const { statusCode } = res
 
@@ -140,7 +141,9 @@ function checkCodePatchedJS (codeJS) {
 
 const patchJSPaths = [
   path.join(__dirname, '/script/bgm.js'),
-  path.join(__dirname, '/script/game.Tools.js')
+  path.join(__dirname, '/script/game.Tools.js'),
+  path.join(__dirname, '/script/UI_Sushe.js'),
+  // path.join(__dirname, '/script/UI_Sushe_Select.js'),
 ]
 
 function readPatchJS (codeJS) {
