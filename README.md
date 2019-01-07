@@ -7,7 +7,7 @@
 
 如果无法正常运行，请确认你的电脑中正确安装了nodeJS
 
-[下载地址](http://nodejs.cn/download/)
+[点击跳转至nodeJS官方下载地址](http://nodejs.cn/download/)
 
 ## 1.04 更新
 1、增加独立的配置文件config.json， 将不需要的功能的active对应值改成0即可
