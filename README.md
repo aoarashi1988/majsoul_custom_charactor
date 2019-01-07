@@ -9,6 +9,28 @@
 
 [下载地址](http://nodejs.cn/download/)
 
+## 1.04 更新
+1、增加独立的配置文件config.json， 将不需要的功能的active对应值改成0即可
+如：
+`
+{
+    "name": "UI_Sushe",
+    "discription": "宿舍全角色、满羁绊、解锁全部角色语音",
+    "path": "/script/UI_Sushe.js",
+    "active": 1
+}
+`
+修改为：
+`
+{
+    "name": "UI_Sushe",
+    "discription": "宿舍全角色、满羁绊、解锁全部角色语音",
+    "path": "/script/UI_Sushe.js",
+    "active": 0
+}
+`
+即可关闭对应功能
+
 ## 1.03 更新
 1、顺应官方修改，将所有请求链接从http转换成https
 
