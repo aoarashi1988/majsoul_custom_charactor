@@ -1,0 +1,22 @@
+{
+    "excute": [
+        {
+            "name": "UI_Sushe",
+            "discription": "宿舍全角色、满羁绊、解锁全部角色语音",
+            "path": "/script/UI_Sushe.js",
+            "active": 1
+        },
+        {
+            "name": "bgm",
+            "path":"/script/bgm.js",
+            "discription": "切换大厅与游戏中的BGM为雀龙门BGM",
+            "active": 1
+        },
+        {
+            "name": "Tools",
+            "path": "/script/game.Tools.js",
+            "discription": "强制开启语音播报番型的功能",
+            "active": 1
+        }
+    ]
+}
