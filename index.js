@@ -139,12 +139,12 @@ function checkCodePatchedJS (codeJS) {
   })
 }
 
-const patchJSPaths = [
-  path.join(__dirname, '/script/bgm.js'),
-  path.join(__dirname, '/script/game.Tools.js'),
-  path.join(__dirname, '/script/UI_Sushe.js'),
-  // path.join(__dirname, '/script/UI_Sushe_Select.js'),
-]
+function getpatchJSPaths (){
+  const excuteConfig = require('./config.json')
+  const excuteJSs = excuteConfig.excute.filter(item => !!item.active)
+  return excuteJSs.map(item => path.join(__dirname, item.path))
+}
+const patchJSPaths = getpatchJSPaths()
 
 function readPatchJS (codeJS) {
   return new Promise((resolve, reject) => {
